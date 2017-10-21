@@ -81,9 +81,34 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
+            // ----------------
+            // gamepad1:
+            // ----------------
+
+            wheelPower = gamepad1.left_stick_y;
+            turnPower = -gamepad1.right_stick_x;
+
+            if (gamepad1.right_bumper) {
+                wheelPower = scaleInput(wheelPower) / 2;
+                turnPower = scaleInput(turnPower) / 2;
+            } else if (gamepad1.left_bumper) {
+                wheelPower = scaleInput(wheelPower) / 4;
+                turnPower = scaleInput(turnPower) / 4;
+            } else {
+                wheelPower = scaleInput(wheelPower);
+                turnPower = scaleInput(turnPower);
+            }
+
+            // allows for tighter point turns
+            if (Math.abs(turnPower) > 0.05f)
+                setPower(turnPower, -turnPower);
+            else
+                setPower(-wheelPower);
+
             // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             // This way it's also easy to just drive straight, or just turn.
+            /*
             drive = -gamepad1.left_stick_y;
             turn  =  gamepad1.right_stick_x;
 
@@ -130,6 +155,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
 
             // Pace this loop so jaw action is reasonable speed.
             sleep(50);
+            */
         }
     }
 }
