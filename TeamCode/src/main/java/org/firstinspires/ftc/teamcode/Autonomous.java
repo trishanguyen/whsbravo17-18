@@ -56,13 +56,10 @@ public class Autonomous {
 
     public static void drive(double power, int time)
     {
-        long startTime = System.currentTimeMillis();
         leftDrive.setPower(power);
         rightDrive.setPower(power);
 
-        while((System.currentTimeMillis() - startTime)<time)
-        {
-        }
+        chersTimer(time);
 
         stopDriving();
     }
@@ -72,25 +69,20 @@ public class Autonomous {
     //for the turn functionS, get rid of time parameter and replace with set time, for 90 degree rotation
     public static void turnLeft(double power, int time)
     {
-        long startTime = System.currentTimeMillis();
+
         leftDrive.setPower(-power);
         rightDrive.setPower(power);
-        while((System.currentTimeMillis() - startTime)<time)
-        {
-        }
-
+        chersTimer(time);
         stopDriving();
     }
 
     public static void turnRight(double power, int time)
     {
-        long startTime = System.currentTimeMillis();
+
         leftDrive.setPower(power);
         rightDrive.setPower(-power);
-        while((System.currentTimeMillis() - startTime)<time)
-        {
-        }
 
+        chersTimer(time);
         stopDriving();
     }
 
@@ -99,6 +91,12 @@ public class Autonomous {
         drive(0,0);
     }
 
+    public static void chersTimer(int time){
+        long startTime = System.currentTimeMillis();
+        while((System.currentTimeMillis() - startTime)<time)
+        {
+        }
+    }
     /*
 
      */
