@@ -51,8 +51,8 @@ public class Autonomous {
     private static ElapsedTime runtime = new ElapsedTime();
     private static DcMotor leftDrive = null;
     private static DcMotor rightDrive = null;
-
-
+    //test
+    //public static void omni
 
     public static void drive(double power, int time)
     {
