@@ -140,8 +140,6 @@ public class Autonomous {
         stopDriving();
     }
 
-
-
     //for the turn functionS, get rid of time parameter and replace with set time, for 90 degree rotation
     public static void turnLeft(double power, int time)
     {
@@ -179,10 +177,5 @@ public class Autonomous {
         {
         }
     }
-    /*
-
-     */
-
-
 
 }

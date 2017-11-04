@@ -35,13 +35,14 @@ public class AutonomousMain extends LinearOpMode
         runtime.reset();
 //
         double power = 1;
+        double halfPower = .5;
 //        float drive = 0.5f;
 //        float turn = 0.5f;
 
 
         // checks to make sure the power values are between -1 and 1
 //        power    = Range.clip(drive + turn, -1.0, 1.0) ;
-//
+//   // private Autonomous A = new Autonomous(ti)
 //        leftDrive.setPower(power);
 //        rightDrive.setPower(power);
 
@@ -49,11 +50,8 @@ public class AutonomousMain extends LinearOpMode
 
         // testing code:
         Autonomous.drive(power, 2000);
-        Autonomous.turnLeft(power, 500);
-
-        Autonomous.drive(power, 2000);
         Autonomous.turnRight(power, 500);
-        Autonomous.drive(-power, 2000);
+        Autonomous.drive(power, 2000);
         Autonomous.stopDriving();
 
         telemetry.addData("Status", "Run Time: " + runtime.toString());
