@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.media.MediaPlayer;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -49,48 +51,118 @@ public class Autonomous {
 
     // Declare OpMode members.
     private static ElapsedTime runtime = new ElapsedTime();
-    private static DcMotor leftDrive = null;
-    private static DcMotor rightDrive = null;
+    public static final int right = 1;
+    public static final int left = 2;
+    public static final int forward = 3;
+    public static final int backward = 4;
+    // Diagonal Right Forward
+    public static final int dRF = 5;
+    // Diagonal Right Backward
+    public static final int dRB = 6;
+    // Diagonal Left Forward
+    public static final int dLF = 7;
+    // Diagonal Left Backward
+    public static final int dLB = 8;
 
+    // Left Motors
+    private static DcMotor MOne = null;
+    private static DcMotor MTwo = null;
+    // Right Motors
+    private static DcMotor MThree = null;
+    private static DcMotor MFour = null;
+    //test
+    public static void omniDrive(double power, byte direction, int time){
+        switch (direction) {
+            case right:
+                MOne.setPower(-power);
+                MTwo.setPower(power);
+                MThree.setPower(power);
+                MFour.setPower(-power);
+                break;
+            case left:
+                MOne.setPower(power);
+                MTwo.setPower(-power);
+                MThree.setPower(-power);
+                MFour.setPower(power);
+                break;
+            case forward:
+                MOne.setPower(power);
+                MTwo.setPower(power);
+                MThree.setPower(-power);
+                MFour.setPower(-power);
+                break;
+            case backward:
+                MOne.setPower(-power);
+                MTwo.setPower(-power);
+                MThree.setPower(power);
+                MFour.setPower(power);
+                break;
+            case dRF:
+                MOne.setPower(0);
+                MTwo.setPower(power);
+                MThree.setPower(0);
+                MFour.setPower(-power);
+                break;
+            case dRB:
+                MOne.setPower(0);
+                MTwo.setPower(-power);
+                MThree.setPower(0);
+                MFour.setPower(power);
+                break;
+            case dLF:
+                MOne.setPower(power);
+                MTwo.setPower(0);
+                MThree.setPower(-power);
+                MFour.setPower(0);
+                break;
+            case dLB:
+                MOne.setPower(-power);
+                MTwo.setPower(0);
+                MThree.setPower(power);
+                MFour.setPower(0);
+                break;
 
+            default:return;
+
+        }
+        chersTimer(time);
+    }
 
     public static void drive(double power, int time)
     {
-        long startTime = System.currentTimeMillis();
-        leftDrive.setPower(power);
-        rightDrive.setPower(power);
+        MOne.setPower(power);
+        MTwo.setPower(power);
+        MThree.setPower(power);
+        MFour.setPower(power);
 
-        while((System.currentTimeMillis() - startTime)<time)
-        {
-        }
+        chersTimer(time);
 
         stopDriving();
     }
 
-
-
     //for the turn functionS, get rid of time parameter and replace with set time, for 90 degree rotation
     public static void turnLeft(double power, int time)
     {
-        long startTime = System.currentTimeMillis();
-        leftDrive.setPower(-power);
-        rightDrive.setPower(power);
-        while((System.currentTimeMillis() - startTime)<time)
-        {
-        }
 
+        MOne.setPower(-power);
+        MTwo.setPower(-power);
+        MThree.setPower(power);
+        MFour.setPower(power);
+
+        chersTimer(time);
         stopDriving();
     }
 
     public static void turnRight(double power, int time)
     {
-        long startTime = System.currentTimeMillis();
-        leftDrive.setPower(power);
-        rightDrive.setPower(-power);
-        while((System.currentTimeMillis() - startTime)<time)
-        {
-        }
 
+        MOne.setPower(power);
+        MTwo.setPower(power);
+        MThree.setPower(-power);
+        MFour.setPower(-power);
+
+
+        chersTimer(time);
         stopDriving();
     }
 
@@ -99,10 +171,11 @@ public class Autonomous {
         drive(0,0);
     }
 
-    /*
-
-     */
-
-
+    public static void chersTimer(int time){
+        long startTime = System.currentTimeMillis();
+        while((System.currentTimeMillis() - startTime)<time)
+        {
+        }
+    }
 
 }
